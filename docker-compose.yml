@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: metro-cafe-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - metro-network
+    command: mongod --replSet rs0
+
+  mongo-init:
+    image: mongo:7
+    container_name: mongo-init
+    depends_on:
+      - mongodb
+    networks:
+      - metro-network
+    command: >
+      bash -c "sleep 10 && mongosh --host mongodb --username admin --password password123 --authenticationDatabase admin --eval 'rs.initiate()'"
+
+volumes:
+  mongo_data:
+
+networks:
+  metro-network:
+    driver: bridge

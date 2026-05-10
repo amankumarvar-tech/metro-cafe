@@ -1,0 +1,17 @@
+{
+  "name": "metro-cafe",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\""
+  },
+  "dependencies": {
+    "concurrently": "^9.2.1",
+    "dotenv": "^17.4.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/dotenv": "^6.1.1",
+    "@types/helmet": "^0.0.48",
+    "@types/node": "^25.6.2"
+  }
+}
